@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Abdulqader Deawaly Portfolio</title>
+<meta name="description" content="Abdulqader Anas Deawaly — Cybersecurity undergraduate at Taibah University (GPA 4.7/5.0). Black Hat CTF Winner. Mawhiba MetaMind M3. Network Security · SOC · Pentesting." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --border: #222222;
+    --text: #ffffff;
+    --muted: #888888;
+    --accent: #ffffff;
+    --heading: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .bg-grid {
+    position: fixed;
+    inset: 0;
+    background-image: 
+      linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 80px 80px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .bg-grid::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, transparent 0%, var(--bg) 80%);
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 3rem;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .nav-logo span { color: var(--muted); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover { color: var(--text); }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .section-label::before {
+    content: '//';
+    color: var(--border);
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 5rem;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 4rem;
+    align-items: end;
+  }
+
+  .hero-name {
+    font-family: var(--heading);
+    font-size: clamp(4rem, 8vw, 7rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    margin-bottom: 2rem;
+  }
+
+  .block-cursor {
+    display: inline-block;
+    color: var(--text);
+    font-weight: 300;
+    margin-left: 6px;
+  }
+
+  .blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 500px;
+    margin-bottom: 2.5rem;
+  }
+
+  .terminal-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: var(--mono);
+    width: 100%;
+    margin-bottom: 6rem;
+  }
+
+  .term-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    color: #555;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+  }
+
+  .term-body {
+    padding: 1.5rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .term-line {
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .term-line .prompt {
+    color: var(--text);
+    margin-right: 0.5rem;
+  }
+
+  .term-output {
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    padding-left: 1.2rem;
+  }
+  .term-output:last-child { margin-bottom: 0; }
+
+  section {
+    padding: 6rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-title {
+    font-family: var(--heading);
+    font-size: 3.5rem;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 3rem;
+  }
+
+  #about .grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 3rem;
+  }
+
+  .about-main h3 {
+    font-family: var(--heading);
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .about-main p {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .edu-sidebar .card-header {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+  
+  .edu-sidebar h4 {
+    font-family: var(--heading);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  
+  .edu-sidebar p {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+
+  .gpa-block {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+  }
+  
+  .gpa-block span {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .gpa-score {
+    font-family: var(--heading);
+    font-size: 4rem;
+    font-weight: 500;
+    line-height: 1;
+  }
+  .gpa-score small {
+    font-size: 1rem;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+
+  .coursework-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .coursework-tags span {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--muted);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+  }
+
+  .skill-col {
+    padding: 2.5rem 2rem;
+    border-right: 1px solid var(--border);
+  }
+  .skill-col:last-child { border-right: none; }
+
+  .skill-col-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+
+  .skill-col h4 {
+    font-family: var(--heading);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+
+  .skill-list {
+    list-style: none;
+  }
+  .skill-list li {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .skill-list li::before { content: '-'; color: var(--border); }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .project-link {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+  }
+
+  .project-link:hover {
+    color: var(--accent);
+  }
+
+  .project-card h3 {
+    font-family: var(--heading);
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .project-role {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .project-desc {
+    color: var(--text);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-points {
+    list-style: none;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+  }
+  .project-points li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.8rem;
+  }
+  .project-points li::before {
+    content: counter(item, decimal-leading-zero);
+    counter-increment: item;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: #444;
+  }
+
+  .project-card { counter-reset: item; }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .project-tags span {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 2px;
+  }
+
+  .honors-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .honor-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2.5rem;
+  }
+
+  .honor-card.flagship {
+    background: radial-gradient(circle at right, #1a1a1a 0%, var(--surface) 50%);
+  }
+
+  .honor-meta {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: #b58900;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .honor-meta span {
+    border: 1px solid #b58900;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .honor-card h3 {
+    font-family: var(--heading);
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .honor-card p {
+    color: var(--muted);
+    max-width: 600px;
+  }
+
+  .creds-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .cred-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
+  }
+
+  .cred-header {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .cred-card h4 {
+    font-family: var(--heading);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+  }
+
+  .cred-source {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .contact-rows {
+    border-top: 1px solid var(--border);
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: center;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+  }
+
+  .contact-label {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    width: 150px;
+    letter-spacing: 0.1em;
+  }
+
+  .contact-value {
+    font-family: var(--heading);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  footer {
+    padding: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 1024px) {
+    .hero-grid, #about .grid, .skills-grid, .projects-grid, .creds-grid {
+      grid-template-columns: 1fr;
+    }
+    .skill-col { border-right: none; border-bottom: 1px solid var(--border); }
+    .hero-name { font-size: 4rem; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<nav>
+  <div class="nav-logo">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Abdulqader Deawaly <span>/cybersecurity</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#credentials">Credentials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="wrapper">
+    <div class="section-label">Cybersecurity Intelligence Dossier</div>
+    
+    <div class="hero-grid">
+      <div>
+        <h1 class="hero-name">
+          <span id="nameLine1"></span><span id="cursor1" class="block-cursor blink">|</span><br>
+          <span id="nameLine2"></span><span id="cursor2" class="block-cursor" style="display:none;">|</span>
+        </h1>
+        <p class="hero-desc">
+          Cybersecurity undergraduate engineering offensive and defensive systems — building the discipline of a future security leader.
+        </p>
+      </div>
+      
+      <div class="terminal-box">
+        <div class="term-header">
+          <span>>_ TTY/0</span>
+          <span>Medina</span>
+        </div>
+        <div class="term-body">
+          <div class="term-line"><span class="prompt">$</span> whoami</div>
+          <div class="term-output">abdulqader@taibah:~ cybersec.undergrad</div>
+          <div class="term-line"><span class="prompt">$</span> cat /etc/mission</div>
+          <div class="term-output">Defending systems. Leading teams. Earning trust.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrapper">
+    <div class="section-label">01 - About</div>
+    
+    <div class="grid">
+      <div class="card about-main">
+        <h3>Operator. Builder. Leader.</h3>
+        <p>I am a Cybersecurity undergraduate at Taibah University, accepted into the prestigious Mawhiba MetaMind M3 cohort for international talent. My focus sits at the intersection of network security, SOC analysis, penetration testing, and cloud infrastructure.</p>
+        <p>I balance offensive and defensive disciplines — engineering end-to-end encrypted systems, leading academic project teams, and competing in CTFs at the international level. I work for the day cybersecurity stops being reactive and starts being doctrine.</p>
+      </div>
+      
+      <div class="card edu-sidebar">
+        <div class="card-header">// EDUCATION</div>
+        <h4>Taibah University</h4>
+        <p>B.Sc. Cybersecurity<br>Medina, Saudi Arabia</p>
+        
+        <div class="gpa-block">
+          <span>GPA</span>
+          <div class="gpa-score">4.7<small> / 5.0</small></div>
+          <span style="margin-top: 1rem;">Expected May 2028</span>
+        </div>
+        
+        <div class="card-header">RELEVANT COURSEWORK</div>
+        <div class="coursework-tags">
+          <span>Network Security</span>
+          <span>Cryptography</span>
+          <span>Ethical Hacking</span>
+          <span>Operating Systems Security</span>
+          <span>Incident Response</span>
+          <span>Critical Thinking</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrapper">
+    <div class="section-label">02 - Capabilities</div>
+    
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+      <h2 class="section-title" style="margin-bottom: 0;">A balanced security stack.</h2>
+      <p style="color: var(--muted); font-size: 0.9rem;">Offensive sharpness. Defensive discipline. Engineered tooling.</p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-col">
+        <div class="skill-col-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          RED
+        </div>
+        <h4>Offensive</h4>
+        <ul class="skill-list">
+          <li>Penetration Testing</li>
+          <li>Ethical Hacking</li>
+          <li>Burp Suite</li>
+          <li>Nmap</li>
+          <li>Vulnerability Scanning</li>
+          <li>CTF / Red Team</li>
+        </ul>
+      </div>
+
+      <div class="skill-col">
+        <div class="skill-col-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          BLUE
+        </div>
+        <h4>Defensive</h4>
+        <ul class="skill-list">
+          <li>Network Security</li>
+          <li>Incident Response</li>
+          <li>Splunk (SIEM)</li>
+          <li>Wireshark</li>
+          <li>TCP/IP · OSI Model</li>
+          <li>SSL/TLS · Cryptography</li>
+        </ul>
+      </div>
+
+      <div class="skill-col">
+        <div class="skill-col-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          DEV
+        </div>
+        <h4>Engineering</h4>
+        <ul class="skill-list">
+          <li>Python</li>
+          <li>Bash</li>
+          <li>SQL</li>
+          <li>Java</li>
+          <li>Django</li>
+          <li>Tkinter · Sockets</li>
+        </ul>
+      </div>
+
+      <div class="skill-col">
+        <div class="skill-col-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          OPS
+        </div>
+        <h4>Systems</h4>
+        <ul class="skill-list">
+          <li>Kali Linux</li>
+          <li>Fedora</li>
+          <li>Windows</li>
+          <li>macOS</li>
+          <li>Cloud Storage</li>
+          <li>Multi-threaded Servers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrapper">
+    <div class="section-label">03 - Selected Work</div>
+    <h2 class="section-title">Systems shipped, not slides.</h2>
+    
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-meta">
+          <span>P/01</span>
+          <a href="https://github.com/5ymb/Secure-Cloud-Storage-LAN.git" target="_blank" class="project-link" aria-label="View Secure Cloud Storage Source">↗</a>
+        </div>
+        <h3>Secure Cloud Storage — E2EE</h3>
+        <div class="project-role">Academic Project Lead · Spring 2026</div>
+        <p class="project-desc">End-to-end encrypted cloud storage. Zero-knowledge server architecture with token-based file sharing.</p>
+        <ul class="project-points">
+          <li>AES-GCM encryption with PBKDF2HMAC (600k iterations) key derivation for true zero-knowledge storage.</li>
+          <li>Multi-threaded server with custom JSON protocol over TLS/SSL sockets for concurrent client transmission.</li>
+          <li>Token-based secure file sharing with HMAC-SHA256 integrity checks for tamper detection.</li>
+        </ul>
+        <div class="project-tags">
+          <span>Python</span> <span>AES-GCM</span> <span>PBKDF2HMAC</span> <span>TLS Sockets</span> <span>HMAC-SHA256</span> <span>Tkinter</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-meta">
+          <span>P/02</span>
+          <span>↗</span>
+        </div>
+        <h3>Customer SaaS Platform</h3>
+        <div class="project-role">Independent Project · Winter 2025 - Ongoing</div>
+        <p class="project-desc">Full-stack web SaaS for customer management with reliable database backend and open-source docs.</p>
+        <ul class="project-points">
+          <li>Interactive, user-friendly web pages for end-to-end data handling.</li>
+          <li>Configured robust backend database for reliable operations at scale.</li>
+          <li>Authored full technical documentation; published open-source on GitHub.</li>
+        </ul>
+        <div class="project-tags">
+          <span>Python</span> <span>Django</span> <span>PostgreSQL</span> <span>REST</span> <span>GitHub</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-meta">
+          <span>P/03</span>
+          <a href="https://github.com/5ymb/SocketProgramingWithPython.git" target="_blank" class="project-link" aria-label="View Secure LAN Messaging Source">↗</a>
+        </div>
+        <h3>Secure LAN Messaging</h3>
+        <div class="project-role">Academic Project Lead · Fall 2025</div>
+        <p class="project-desc">Multi-threaded LAN messaging system with a clean GUI — concurrent clients over TCP.</p>
+        <ul class="project-points">
+          <li>Multi-threaded client handler for simultaneous TCP communication.</li>
+          <li>GUI engineered for usability — secure messaging without friction.</li>
+          <li>Led architecture and code review across the project team.</li>
+        </ul>
+        <div class="project-tags">
+          <span>Python</span> <span>Sockets</span> <span>Threading</span> <span>Tkinter GUI</span> <span>TCP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="credentials">
+  <div class="wrapper">
+    <div class="section-label">04 - Track Record</div>
+    <h2 class="section-title">Honors, awards, & alliances.</h2>
+    
+    <div class="honors-grid">
+      <div class="honor-card flagship">
+        <div class="honor-meta">
+          <span>FLAGSHIP</span> DEC 2025
+        </div>
+        <h3>Black Hat MEA — Cyberani CTF Winner</h3>
+        <p style="color: #b58900; margin-bottom: 1.5rem; font-family: var(--mono); font-size: 0.85rem;">Presented by Aramco</p>
+        <p>Winner in the Cyberani Capture-the-Flag competition at Black Hat MEA — the Middle East's premier security event.</p>
+      </div>
+    </div>
+
+    <div class="section-label">05 - Credentials</div>
+    <h2 class="section-title">Continuous calibration.</h2>
+    
+    <div class="creds-grid">
+      <div class="cred-card">
+        <div class="cred-header"><span>✓</span> 2026</div>
+        <h4>Cross-Functional Collaboration Specialization</h4>
+        <div class="cred-source">Coursera</div>
+      </div>
+      
+      <div class="cred-card">
+        <div class="cred-header"><span>✓</span> 2026</div>
+        <h4>Introduction to Cybersecurity</h4>
+        <div class="cred-source">NSA × KAUST</div>
+      </div>
+      
+      <div class="cred-card">
+        <div class="cred-header"><span>✓</span> 2025</div>
+        <h4>Jr Penetration Tester Path</h4>
+        <div class="cred-source">TryHackMe</div>
+      </div>
+      
+      <div class="cred-card">
+        <div class="cred-header"><span>✓</span> 2025</div>
+        <h4>Cyber Security 101 Path</h4>
+        <div class="cred-source">TryHackMe</div>
+      </div>
+      
+      <div class="cred-card">
+        <div class="cred-header"><span>✓</span> 2025</div>
+        <h4>Certified Cybersecurity Educator Professional (CCEP)</h4>
+        <div class="cred-source" style="text-transform: uppercase;">RED TEAM LEADERS</div>
+      </div>
+      
+      <div class="cred-card">
+        <div class="cred-header"><span>✓</span> 2025</div>
+        <h4>Vulnerability Scanning with Nmap</h4>
+        <div class="cred-source">Coursera</div>
+      </div>
+      
+      <div class="cred-card">
+        <div class="cred-header"><span>✓</span> 2025</div>
+        <h4>Decryption with Python</h4>
+        <div class="cred-source">Coursera</div>
+      </div>
+      
+      <div class="cred-card">
+        <div class="cred-header"><span>✓</span> 2025</div>
+        <h4>EYOUTH Learning Plan for AI</h4>
+        <div class="cred-source">IBM SkillsBuild</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrapper">
+    <div class="section-label">06 - Connect</div>
+    <h2 class="section-title" style="font-size: 5rem; max-width: 800px; line-height: 1.1; margin-bottom: 2rem;">Open to collaboration.</h2>
+    <p style="color: var(--muted); font-size: 1.2rem; margin-bottom: 4rem;">Internships, research, CTF teams, and leadership programs in cybersecurity.</p>
+    
+    <div class="contact-rows">
+      <a href="mailto:qad301011@gmail.com" class="contact-row">
+        <div class="contact-label">EMAIL</div>
+        <div class="contact-value">qad301011@gmail.com</div>
+      </a>
+      <a href="https://github.com/5ymb" class="contact-row">
+        <div class="contact-label">GITHUB</div>
+        <div class="contact-value">github.com/5ymb</div>
+      </a>
+      <a href="https://linkedin.com/in/abdulqader-deawaly-5b161536b" class="contact-row">
+        <div class="contact-label">LINKEDIN</div>
+        <div class="contact-value">in/abdulqader-deawaly</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrapper" style="width: 100%; display: flex; justify-content: space-between;">
+    <span>© 2026 Abdulqader A. Deawaly</span>
+    <span>Built with discipline · Medina, KSA</span>
+    <span>Arabic · English</span>
+  </div>
+</footer>
+
+<script>
+
+const line1 = "Abdulqader";
+const line2 = "Anas Deawaly";
+const el1 = document.getElementById('nameLine1');
+const el2 = document.getElementById('nameLine2');
+const cursor1 = document.getElementById('cursor1');
+const cursor2 = document.getElementById('cursor2');
+let idx1 = 0;
+let idx2 = 0;
+
+function typeName() {
+
+  if (idx1 < line1.length) {
+    el1.textContent += line1.charAt(idx1);
+    idx1++;
+    setTimeout(typeName, 100);
+  } 
+
+  else if (idx2 === 0) {
+    cursor1.style.display = 'none';
+    cursor2.style.display = 'inline-block';
+    cursor2.classList.add('blink');
+    
+    el2.textContent += line2.charAt(idx2);
+    idx2++;
+    setTimeout(typeName, 100);
+  } 
+  // Type Line 2
+  else if (idx2 < line2.length) {
+    el2.textContent += line2.charAt(idx2);
+    idx2++;
+    setTimeout(typeName, 100);
+  }
+}
+
+setTimeout(typeName, 500);
+</script>
+
+</body>
+</html>
