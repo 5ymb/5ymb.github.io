@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdulqader A. Deawaly | Official Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Inter:wght@300;400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; background: #030303; }
+        body {
+            background-color: #030303;
+            color: #dcdcdc;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Cinzel', serif; font-weight: 500; letter-spacing: 1px; color: #ffffff; }
+        .accent { color: #c5a059; } 
+
+        #cinematic-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 0; opacity: 0.8;
+        }
+        .vignette {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 40;
+            background: radial-gradient(circle, transparent 40%, #030303 120%);
+        }
+
+        .wrapper { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 10; }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100vw;
+            padding: 1.5rem 0;
+            display: flex; justify-content: center; align-items: center;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            background: rgba(3, 3, 3, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+        .nav-links { display: flex; gap: 3rem; list-style: none; padding: 0 1rem; }
+        .nav-links a { color: #c5a059; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; transition: color 0.4s; }
+        .nav-links a:hover { color: #fff; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 6rem; }
+        .hero-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 4rem; align-items: center; }
+        
+        .hero-title { 
+            font-size: clamp(2.5rem, 6vw, 5rem); 
+            line-height: 1.1; 
+            margin-bottom: 1.5rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            color: #ffffff; 
+            text-shadow: 0 0 25px rgba(197, 160, 89, 0.9), 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+        .hero-subtitle { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #c5a059; letter-spacing: 4px; margin-bottom: 1.5rem; text-transform: uppercase; }
+        .hero-desc { font-size: 1.1rem; color: #aaa; max-width: 550px; }
+
+        .terminal-box {
+            background: rgba(10, 10, 10, 0.7);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            width: 100%;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+        .terminal-box:hover { border-color: #c5a059; transform: translateY(-5px); }
+        .term-header {
+            display: flex; justify-content: space-between;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            color: #888; font-size: 0.85rem; letter-spacing: 1px;
+        }
+        .term-body { padding: 1.5rem; font-size: 0.95rem; line-height: 1.8; }
+        .term-line { color: #fff; margin-bottom: 0.5rem; display: flex; align-items: flex-start; gap: 1rem; }
+        .term-line .prompt { color: #c5a059; font-weight: 500; }
+        .term-output { color: #aaa; margin-bottom: 1.5rem; padding-left: 1.7rem; }
+        .term-output:last-child { margin-bottom: 0; }
+
+        section { padding: 6rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-title { font-size: 2.5rem; text-transform: uppercase; position: relative; display: inline-block; padding-bottom: 10px; }
+        .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 1px; background: #c5a059; }
+
+        .grid-2 { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+
+        .card { padding: 2.5rem; background: rgba(15, 15, 15, 0.6); border: 1px solid rgba(197, 160, 89, 0.15); transition: all 0.5s ease; border-radius: 4px; }
+        .card:hover { border-color: rgba(197, 160, 89, 0.6); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .card h3 { font-size: 1.3rem; margin-bottom: 1rem; color: #c5a059; }
+        .card p { font-size: 0.95rem; color: #aaa; }
+        
+        .meta-text { font-family: 'Cinzel', serif; font-size: 0.75rem; color: #888; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 0.5rem; }
+        
+        .link-icon { color: #c5a059; text-decoration: none; float: right; transition: color 0.3s; display: inline-flex; align-items: center; }
+        .link-icon:hover { color: #fff; }
+        .link-icon svg { width: 18px; height: 18px; }
+
+        .honor-flagship { text-align: center; padding: 4rem 2rem; background: radial-gradient(circle at center, rgba(197, 160, 89, 0.15) 0%, transparent 70%); border: 1px solid rgba(197, 160, 89, 0.4); margin-bottom: 3rem; border-radius: 4px; transition: transform 0.4s ease, border-color 0.4s ease; }
+        .honor-flagship:hover { transform: translateY(-5px); border-color: rgba(197, 160, 89, 0.8); }
+        .honor-flagship h3 { font-size: 2.2rem; margin-bottom: 1rem; color: #ffffff; }
+
+        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+        .tags span { padding: 0.3rem 0.8rem; border: 1px solid rgba(255,255,255,0.1); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: #bbb; }
+
+        .edu-img { width: 100%; height: 180px; object-fit: cover; border-radius: 4px; margin-bottom: 1.5rem; border: 1px solid rgba(197, 160, 89, 0.3); opacity: 0.8; transition: opacity 0.3s; }
+        .card:hover .edu-img { opacity: 1; }
+
+        footer { padding: 3rem 0; text-align: center; font-family: 'Cinzel', serif; font-size: 0.8rem; color: #666; letter-spacing: 2px; }
+
+        @media (max-width: 1024px) {
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+            .hero-subtitle, .hero-title, .hero-desc { text-align: center; margin-left: auto; margin-right: auto; }
+            .terminal-box { max-width: 600px; margin: 0 auto; text-align: left; }
+        }
+        
+        @media (max-width: 768px) {
+            .wrapper { padding: 0 1.5rem; }
+            section { padding: 4rem 0; }
+            .section-header { margin-bottom: 3rem; }
+            
+            nav { padding: 1rem 0; }
+            .nav-links { gap: 1rem; justify-content: center; flex-wrap: wrap; }
+            .nav-links a { font-size: 0.75rem; letter-spacing: 1px; }
+            
+            #hero { padding-top: 7rem; min-height: 90vh; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 2rem; }
+            
+            .card { padding: 1.5rem; }
+            .honor-flagship { padding: 2.5rem 1.5rem; }
+            .honor-flagship h3 { font-size: 1.8rem; }
+            
+            .term-header { padding: 0.8rem 1rem; font-size: 0.75rem; }
+            .term-body { padding: 1rem; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="cinematic-bg"></canvas>
+    <div class="vignette"></div>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#credentials">Credentials</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="wrapper">
+        <section id="hero" class="reveal">
+            <div class="hero-grid">
+                <div>
+                    <h2 class="hero-subtitle">Operator · Builder · Leader</h2>
+                    <h1 class="hero-title">Abdulqader<br>Anas Deawaly</h1>
+                    <p class="hero-desc">Cybersecurity undergraduate engineering offensive and defensive systems — building the discipline of a future security leader.</p>
+                </div>
+                
+                <div class="terminal-box">
+                    <div class="term-header">
+                        <span>>_ TTY/0</span>
+                        <span>Medina</span>
+                    </div>
+                    <div class="term-body">
+                        <div class="term-line">
+                            <span class="prompt">$</span>
+                            <span>whoami</span>
+                        </div>
+                        <div class="term-output">
+                            abdulqader@taibah:~cybersec.undergrad
+                        </div>
+                        <div class="term-line">
+                            <span class="prompt">$</span>
+                            <span>cat /etc/mission</span>
+                        </div>
+                        <div class="term-output">
+                            Defending systems. Leading teams. Earning trust.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="reveal">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <div class="grid-2">
+                <div>
+                    <p style="margin-bottom: 1.5rem;">I am a Cybersecurity undergraduate at Taibah University, accepted into the prestigious Mawhiba MetaMind M3. My focus sits at the intersection of network security, SOC analysis, penetration testing, and cloud infrastructure.</p>
+                    <p>I balance offensive and defensive disciplines — engineering end-to-end encrypted systems, leading academic project teams, and competing in CTFs at the international level. I work for the day cybersecurity stops being reactive and starts being doctrine.</p>
+                </div>
+                <div class="card" style="padding: 1.5rem;">
+                    <img src="taibah.jpg" alt="Taibah University Campus" class="edu-img">
+                    
+                    <span class="meta-text">Academic Foundation</span>
+                    <h3 style="font-size: 1.5rem; color: #fff;">Taibah University</h3>
+                    <p style="margin-bottom: 1.5rem;">B.Sc. Cybersecurity · Expected May 2028</p>
+                    <h2 style="font-size: 2.5rem; color: #c5a059; line-height: 1;">4.7<span style="font-size: 1rem; color: #666;">/5.0</span></h2>
+                    <span class="meta-text" style="margin-top: 0.5rem; font-size: 0.7rem;">Cumulative GPA</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="reveal">
+            <div class="section-header">
+                <h2 class="section-title">Security Skills</h2>
+            </div>
+            <div class="grid-4">
+                <div class="card">
+                    <span class="meta-text">Red Team</span>
+                    <h3>Offensive</h3>
+                    <p>Penetration Testing, Ethical Hacking, Burp Suite, Nmap, Vulnerability Scanning, CTFs.</p>
+                </div>
+                <div class="card">
+                    <span class="meta-text">Blue Team</span>
+                    <h3>Defensive</h3>
+                    <p>Network Security, Incident Response, Splunk (SIEM), Wireshark, TCP/IP, SSL/TLS, Cryptography.</p>
+                </div>
+                <div class="card">
+                    <span class="meta-text">Development</span>
+                    <h3>Engineering</h3>
+                    <p>Python, Bash, SQL, Java, Django, Tkinter, Sockets, Multi-threaded Servers.</p>
+                </div>
+                <div class="card">
+                    <span class="meta-text">Infrastructure</span>
+                    <h3>Systems</h3>
+                    <p>Kali Linux, Fedora, Windows, macOS, Cloud Storage, Server Architecture.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="reveal">
+            <div class="section-header">
+                <h2 class="section-title">Selected Projects</h2>
+            </div>
+            <div class="grid-3">
+                <div class="card">
+                    <span class="meta-text">Project / 01 
+                        <a href="https://github.com/5ymb/Secure-Cloud-Storage-LAN.git" target="_blank" class="link-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        </a>
+                    </span>
+                    <h3>Secure Cloud Storage</h3>
+                    <p>End-to-end encrypted cloud storage. Zero-knowledge server architecture with token-based file sharing.</p>
+                    <div class="tags"><span>Python</span><span>AES-GCM</span><span>TLS</span></div>
+                </div>
+                <div class="card">
+                    <span class="meta-text">Project / 02</span>
+                    <h3>Customer SaaS Platform</h3>
+                    <p>Full-stack web SaaS for customer management with reliable database backend and open-source docs.</p>
+                    <div class="tags"><span>Django</span><span>PostgreSQL</span><span>REST</span></div>
+                </div>
+                <div class="card">
+                    <span class="meta-text">Project / 03 
+                        <a href="https://github.com/5ymb/SocketProgramingWithPython.git" target="_blank" class="link-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        </a>
+                    </span>
+                    <h3>Secure LAN Messaging</h3>
+                    <p>Multi-threaded LAN messaging system with a clean GUI — concurrent clients over TCP.</p>
+                    <div class="tags"><span>Sockets</span><span>Threading</span><span>TCP</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="credentials" class="reveal">
+            <div class="section-header">
+                <h2 class="section-title">Credentials & Honors</h2>
+            </div>
+            
+            <div class="honor-flagship">
+                <span class="meta-text" style="color: #c5a059;">Flagship Honor · Dec 2025</span>
+                <h3>Cyberani CTF Winner</h3>
+                <p>Winner in the Cyberani Capture-the-Flag competition at Black Hat MEA — the Middle East's premier security event, presented by Aramco.</p>
+            </div>
+
+            <div class="honor-flagship">
+                <span class="meta-text" style="color: #c5a059;">Outstanding Student · Jun 2023</span>
+                <h3>The Office Award for Outstanding Student Performance</h3>
+                <p>Outstanding Student category — Awarded by the North Medina Education Office.</p>
+            </div>
+
+            <div class="grid-4">
+                <div class="card" style="padding: 1.5rem;">
+                    <span class="meta-text">2026</span>
+                    <h4 style="font-size: 1rem; margin-bottom: 0.5rem; color:#fff;">Cross-Functional Collaboration</h4>
+                    <p style="font-size: 0.8rem; color: #c5a059;">University of Colorado System</p>
+                </div>
+                <div class="card" style="padding: 1.5rem;">
+                    <span class="meta-text">2026</span>
+                    <h4 style="font-size: 1rem; margin-bottom: 0.5rem; color:#fff;">Intro to Cybersecurity</h4>
+                    <p style="font-size: 0.8rem; color: #c5a059;">NSA × KAUST</p>
+                </div>
+                <div class="card" style="padding: 1.5rem;">
+                    <span class="meta-text">2025</span>
+                    <h4 style="font-size: 1rem; margin-bottom: 0.5rem; color:#fff;">Jr Penetration Tester Path</h4>
+                    <p style="font-size: 0.8rem; color: #c5a059;">TryHackMe</p>
+                </div>
+                <div class="card" style="padding: 1.5rem;">
+                    <span class="meta-text">2025</span>
+                    <h4 style="font-size: 1rem; margin-bottom: 0.5rem; color:#fff;">Cyber Security 101 Path</h4>
+                    <p style="font-size: 0.8rem; color: #c5a059;">TryHackMe</p>
+                </div>
+                <div class="card" style="padding: 1.5rem;">
+                    <span class="meta-text">2025</span>
+                    <h4 style="font-size: 1rem; margin-bottom: 0.5rem; color:#fff;">Cybersecurity Educator (CCEP)</h4>
+                    <p style="font-size: 0.8rem; color: #c5a059;">RED TEAM LEADERS</p>
+                </div>
+                <div class="card" style="padding: 1.5rem;">
+                    <span class="meta-text">2025</span>
+                    <h4 style="font-size: 1rem; margin-bottom: 0.5rem; color:#fff;">Vulnerability Scanning (Nmap)</h4>
+                    <p style="font-size: 0.8rem; color: #c5a059;">Coursera</p>
+                </div>
+                <div class="card" style="padding: 1.5rem;">
+                    <span class="meta-text">2025</span>
+                    <h4 style="font-size: 1rem; margin-bottom: 0.5rem; color:#fff;">Decryption with Python</h4>
+                    <p style="font-size: 0.8rem; color: #c5a059;">Coursera</p>
+                </div>
+                <div class="card" style="padding: 1.5rem;">
+                    <span class="meta-text">2025</span>
+                    <h4 style="font-size: 1rem; margin-bottom: 0.5rem; color:#fff;">EYOUTH Learning Path for AI</h4>
+                    <p style="font-size: 0.8rem; color: #c5a059;">IBM SkillsBuild</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="reveal" style="text-align: center; border: none;">
+            <div class="section-header">
+                <h2 class="section-title">Contact</h2>
+            </div>
+            <p style="margin-bottom: 3rem; color: #aaa;">Open to internships, research, CTF teams, and leadership programs.</p>
+            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <a href="mailto:qad301011@gmail.com" style="color: #c5a059; text-decoration: none; font-family: 'Cinzel', serif; font-size: 1.1rem; border: 1px solid #c5a059; padding: 10px 30px; transition: all 0.3s; border-radius: 4px;">Email</a>
+                <a href="https://github.com/5ymb" target="_blank" style="color: #c5a059; text-decoration: none; font-family: 'Cinzel', serif; font-size: 1.1rem; border: 1px solid #c5a059; padding: 10px 30px; transition: all 0.3s; border-radius: 4px;">GitHub</a>
+                <a href="https://linkedin.com/in/abdulqader-deawaly-5b161536b" target="_blank" style="color: #c5a059; text-decoration: none; font-family: 'Cinzel', serif; font-size: 1.1rem; border: 1px solid #c5a059; padding: 10px 30px; transition: all 0.3s; border-radius: 4px;">LinkedIn</a>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2026 Abdulqader A. Deawaly.<br>
+                 Medina, KSA.</p>
+        </footer>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('cinematic-bg');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        class Ember {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 1) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.y < 0) {
+                    this.y = height;
+                    this.x = Math.random() * width;
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(197, 160, 89, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particles = [];
+            let count = window.innerWidth < 768 ? 40 : 100;
+            for (let i = 0; i < count; i++) {
+                particles.push(new Ember());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => { resize(); init(); });
+        resize(); init(); animate();
+
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+</body>
+</html>
