@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abdulqader A. Deawaly | Official Portfolio</title>
-    <!-- Victorian/Cinematic & Terminal Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Inter:wght@300;400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        /* Base / Cinematic Reset */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; background: #050505; }
         body {
@@ -18,10 +16,8 @@
             overflow-x: hidden;
         }
 
-        /* Typography */
         h1, h2, h3, h4 { font-family: 'Cinzel', serif; font-weight: 500; letter-spacing: 1px; color: #ffffff; }
 
-        /* Cinematic Background FX */
         #cinematic-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none; z-index: 0; opacity: 1;
@@ -32,10 +28,10 @@
             background: radial-gradient(circle, transparent 30%, #050505 120%);
         }
 
-        /* Container */
+
         .wrapper { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 10; }
 
-        /* Nav (Fixed & Sticky) */
+
         nav {
             position: fixed;
             top: 0; left: 0; width: 100vw;
@@ -50,11 +46,11 @@
         .nav-links a { color: #a3a3a3; text-decoration: none; font-family: 'Cinzel', serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; transition: color 0.4s, text-shadow 0.4s; }
         .nav-links a:hover { color: #00ff88; text-shadow: 0 0 8px rgba(0, 255, 136, 0.6); }
 
-        /* Smooth Scroll Reveal */
+
         .reveal { opacity: 0; transform: translateY(30px); transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Hero */
+
         #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 6rem; }
         .hero-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 4rem; align-items: center; }
         
@@ -70,7 +66,6 @@
         .hero-subtitle { font-family: 'Cinzel', serif; font-size: 1.1rem; color: #00ff88; letter-spacing: 4px; margin-bottom: 1.5rem; text-transform: uppercase; }
         .hero-desc { font-size: 1.1rem; color: #a3a3a3; max-width: 550px; }
 
-        /* Terminal Box */
         .terminal-box {
             background: rgba(15, 15, 15, 0.9);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -95,18 +90,16 @@
         .term-output { color: #a3a3a3; margin-bottom: 1.5rem; padding-left: 1.7rem; }
         .term-output:last-child { margin-bottom: 0; }
 
-        /* Sections */
+
         section { padding: 6rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .section-header { text-align: center; margin-bottom: 4rem; }
         .section-title { font-size: 2.5rem; text-transform: uppercase; position: relative; display: inline-block; padding-bottom: 10px; color: #ffffff; }
         .section-title::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 1px; background: #00ff88; }
 
-        /* Grids */
         .grid-2 { display: grid; grid-template-columns: 1.5fr 1fr; gap: 3rem; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
 
-        /* Cards / Content */
         .card { padding: 2.5rem; background: rgba(15, 15, 15, 0.8); border: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.4s ease; border-radius: 4px; }
         .card:hover { border-color: rgba(0, 255, 136, 0.4); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 255, 136, 0.05); }
         .card h3 { font-size: 1.3rem; margin-bottom: 1rem; color: #ffffff; }
@@ -114,25 +107,20 @@
         
         .meta-text { font-family: 'Cinzel', serif; font-size: 0.75rem; color: #00ff88; letter-spacing: 1px; text-transform: uppercase; display: block; margin-bottom: 0.5rem; }
         
-        /* Fixed SVG Link Icon */
         .link-icon { color: #00ff88; text-decoration: none; float: right; transition: color 0.3s, transform 0.3s; display: inline-flex; align-items: center; }
         .link-icon:hover { color: #ffffff; transform: translate(2px, -2px); }
         .link-icon svg { width: 18px; height: 18px; }
 
-        /* Honors */
         .honor-flagship { text-align: center; padding: 4rem 2rem; background: radial-gradient(circle at center, rgba(0, 255, 136, 0.03) 0%, transparent 70%); border: 1px solid rgba(0, 255, 136, 0.2); margin-bottom: 3rem; border-radius: 4px; transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease; }
         .honor-flagship:hover { transform: translateY(-5px); border-color: rgba(0, 255, 136, 0.5); box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6); }
         .honor-flagship h3 { font-size: 2.2rem; margin-bottom: 1rem; color: #ffffff; }
 
-        /* Tags */
         .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
         .tags span { padding: 0.3rem 0.8rem; border: 1px solid rgba(0, 255, 136, 0.2); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: #e5e7eb; background: rgba(0, 255, 136, 0.05); }
 
-        /* Education Image */
         .edu-img { width: 100%; height: 180px; object-fit: cover; border-radius: 4px; margin-bottom: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.1); opacity: 0.8; transition: all 0.3s; filter: grayscale(20%); }
         .card:hover .edu-img { opacity: 1; filter: grayscale(0%); border-color: rgba(0, 255, 136, 0.3); }
 
-        /* Interactive Contact Buttons */
         .contact-container { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
         .btn-contact {
             color: #00ff88;
@@ -152,10 +140,8 @@
             transform: translateY(-2px);
         }
 
-        /* Footer */
         footer { padding: 3rem 0; text-align: center; font-family: 'Cinzel', serif; font-size: 0.8rem; color: #737373; letter-spacing: 2px; }
 
-        /* Mobile Responsive Adjustments */
         @media (max-width: 1024px) {
             .grid-3 { grid-template-columns: repeat(2, 1fr); }
             .grid-4 { grid-template-columns: repeat(2, 1fr); }
@@ -186,8 +172,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Animated Cinematic Background (Formal Platinum Waves) -->
     <canvas id="cinematic-bg"></canvas>
     <div class="vignette"></div>
 
@@ -398,7 +382,6 @@
         </footer>
     </div>
 
-    <!-- Formal Grayscale Fluid Waves Animation Script -->
     <script>
         const canvas = document.getElementById('cinematic-bg');
         const ctx = canvas.getContext('2d');
@@ -418,7 +401,6 @@
             
             for (let i = 0; i < numLines; i++) {
                 ctx.beginPath();
-                // لون فضي هادي يعطي خلفية فخمة ويسمح للأخضر السيبراني يبرز
                 ctx.strokeStyle = `rgba(255, 255, 255, ${0.015 + (i / numLines) * 0.12})`;
                 ctx.lineWidth = 1.2; 
                 
@@ -442,7 +424,6 @@
         resize(); 
         animate();
 
-        // Reveal Animation
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
